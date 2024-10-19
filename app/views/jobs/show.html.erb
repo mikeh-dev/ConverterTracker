@@ -1,0 +1,62 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Job Details</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-600">Job Information</h2>
+      <p class="mb-2 text-gray-600"><strong>Job ID:</strong> <%= @job.id %></p>
+      <p class="mb-2 text-gray-600"><strong>Created At:</strong> <%= @job.created_at.strftime("%B %d, %Y") %></p>
+      <p class="mb-2 text-gray-600"><strong>Status:</strong> <%= @job.status %></p>
+      <p class="mb-2 text-gray-600"><strong>Description:</strong> <%= @job.description %></p>
+      <p class="mb-2 text-gray-600"><strong>Customer Name:</strong> <%= @job.customer_name %></p>
+      <p class="mb-2 text-gray-600"><strong>Installation Date:</strong> <%= @job.start_date.strftime("%e").to_i.ordinalize %> <%= @job.start_date.strftime("%B %Y") %></p>
+    </div>
+
+    <%= turbo_frame_tag "job_status" do %>
+      <div class="bg-white shadow rounded-lg p-6 mt-4">
+        <h2 class="text-xl font-semibold mb-4 text-gray-600">Current Status</h2>
+        <p class="text-lg font-medium mb-4
+                  <%= @job.status == 'completed' ? 'text-green-600' : 'text-yellow-600' %>">
+          <%= @job.status.capitalize %>
+        </p>
+        <div class="mt-4">
+          <h3 class="text-lg font-semibold mb-2 text-gray-600">Update Status</h3>
+          <%= form_with(model: @job, local: false) do |f| %>
+            <div class="flex space-x-2 justify-center">
+              <%= f.submit "Scheduled", name: "job[status]", value: "scheduled", class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" %>
+              <%= f.submit "In Progress", name: "job[status]", value: "in_progress", class: "bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" %>
+              <%= f.submit "Complete", name: "job[status]", value: "completed", class: "bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-600">Vehicle Details</h2>
+      <p class="text-gray-600">Vehicle details here</p>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-600">Vehicle Images</h2>
+      <p class="text-gray-600">Vehicle images here</p>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-600">Job Notes</h2>
+      <p class="text-gray-600">Job notes here</p>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-600">Job Files</h2>
+      <p class="text-gray-600">Job files here</p>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6 col-span-1 md:col-span-2 mt-6">
+      <div class="flex justify-between items-center">
+        <%= link_to "Edit", edit_job_path(@job), class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" %>
+        <%= link_to "Back", jobs_path, class: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" %>
+      </div>
+    </div>
+  </div>
+</div>
