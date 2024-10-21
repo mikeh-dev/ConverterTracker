@@ -12,4 +12,5 @@ Technologies used:
 - Devise
 - Rspec with FactoryBot, ShouldaMatchers, Capybara, Faker
 
+ # Acknowledgements
 UI was given a lift with Rails UI from Andy Leverenz. More info on that here: https://github.com/andyleverenz/rails_ui
