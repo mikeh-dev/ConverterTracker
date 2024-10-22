@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     mount Railsui::Engine, at: "/railsui"
   end
 
-  root "page#home"
+  root "page#dashboard"
 
 	resources :jobs
 
